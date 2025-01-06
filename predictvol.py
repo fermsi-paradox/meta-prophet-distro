@@ -67,9 +67,7 @@ Agency_dataframe = weather.merge(demographics, on=['Agency'], how='left')
 mother_dataframe = sku_dataframe.merge(
     Agency_dataframe, on=['YearMonth', 'Agency'], how='left')
 
-# Turn the categorical SKU data into booleans columns instead. Also making
-#a data frame for a PCA run.
-PCAmother_df = mother_dataframe.copy()
+# Turn the categorical SKU data into booleans columns instead.
 mother_dataframe = pd.get_dummies(
     mother_dataframe, columns=['SKU'], dummy_na=False)
 
@@ -122,8 +120,6 @@ soda_prophet = Prophet()
 soda_prophet.fit(prophet_feed_soda)
 weather_prophet = Prophet()
 weather_prophet.fit(prophet_feed_weather)
-
-
 
 # Combine all futures data and evaluate the three Prophets' predictions.
 #### Build a Future forecast dataframe for the soda prophet predict.
